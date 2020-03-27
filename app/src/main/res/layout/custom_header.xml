@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/custom_header_layout"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/ch_container"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/projectName"
+            android:layout_marginTop="@dimen/materialize_baseline_grid_x2"
+            android:layout_marginBottom="0dp"
+            android:layout_marginStart="@dimen/materialize_baseline_grid_x2"
+            android:layout_marginEnd="@dimen/materialize_baseline_grid_x2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/untitled"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginStart="2dp">
+
+            <com.mikepenz.iconics.view.IconicsImageButton
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:id="@+id/openProject"
+                app:iiv_color="@color/material_drawer_secondary_text"
+                app:iiv_size="32dp"
+                app:iiv_padding="3dp"
+                app:iiv_icon="cmd-folder-outline"
+                />
+            <com.mikepenz.iconics.view.IconicsImageButton
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:id="@+id/saveProject"
+                app:iiv_color="@color/material_drawer_secondary_text"
+                app:iiv_size="28dp"
+                app:iiv_padding="4dp"
+                app:iiv_icon="cmd-content-save-outline"
+                />
+            <com.mikepenz.iconics.view.IconicsImageButton
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:id="@+id/closeProject"
+                app:iiv_color="@color/material_drawer_secondary_text"
+                app:iiv_size="32dp"
+                app:iiv_padding="4dp"
+                app:iiv_icon="cmd-delete-sweep"
+                />
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

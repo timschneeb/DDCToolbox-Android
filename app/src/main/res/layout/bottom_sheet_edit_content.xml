@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/filter_type"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+                android:id="@+id/filterType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:hint="@string/filter_type_hint"
+                app:met_floatingLabel="none"
+                app:met_primaryColor="@color/colorAccent"
+                app:met_textColor="@color/primaryText"
+                app:met_textColorHint="@color/secondaryText"
+                app:met_baseColor="@color/secondaryText"
+                app:met_underlineColor="@color/secondaryText"
+                android:drawableEnd="@drawable/ic_expand_more"
+                />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/frequency"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <EditText
+                android:id="@+id/frequencyInput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/frequency_hint"
+                android:importantForAutofill="no"
+                android:inputType="numberSigned"
+                android:singleLine="true" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/bandwidth"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <EditText
+                android:id="@+id/bandwidthInput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/bandwidth_hint"
+                android:importantForAutofill="no"
+                android:inputType="numberDecimal"
+                android:singleLine="true" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/slope"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <EditText
+                android:id="@+id/slopeInput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/slope_hint"
+                android:importantForAutofill="no"
+                android:inputType="numberDecimal"
+                android:singleLine="true" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/gain"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <EditText
+                android:id="@+id/gainInput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/gain_hint"
+                android:importantForAutofill="no"
+                android:inputType="number|numberDecimal|numberSigned"
+                android:singleLine="true" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/saveFilter"
+                android:text="@string/save_filter"/>
+
+        </TableRow>
+    </TableLayout>
+</LinearLayout>

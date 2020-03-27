@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginStart="2dp">
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <com.mikepenz.iconics.view.IconicsImageButton
+            style="?android:attr/borderlessButtonStyle"
+            android:id="@+id/infoFilter"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            app:iiv_color="@color/material_drawer_secondary_text"
+            app:iiv_size="32dp"
+            app:iiv_padding="3dp"
+            app:iiv_icon="cmd-information-outline"
+            />
+        <com.mikepenz.iconics.view.IconicsImageButton
+            style="?android:attr/borderlessButtonStyle"
+            android:id="@+id/editFilter"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            app:iiv_color="@color/material_drawer_secondary_text"
+            app:iiv_size="28dp"
+            app:iiv_padding="3dp"
+            app:iiv_icon="gmi-edit"
+            />
+        <com.mikepenz.iconics.view.IconicsImageButton
+            style="?android:attr/borderlessButtonStyle"
+            android:id="@+id/deleteFilter"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            app:iiv_color="@color/material_drawer_secondary_text"
+            app:iiv_size="32dp"
+            app:iiv_padding="3dp"
+            app:iiv_icon="cmd-delete-sweep"
+            />
+
+    </LinearLayout>
+</LinearLayout>

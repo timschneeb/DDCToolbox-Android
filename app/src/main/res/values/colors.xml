@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#1564bf</color>
+    <color name="colorBackground">@android:color/background_light</color>
+    <color name="colorBackground_cardView">@color/cardview_light_background</color>
+
+    <color name="primaryText">#212121</color>
+    <color name="secondaryText">#757575</color>
+    <color name="midText">#20000000</color>
+    <color name="colorHint">#61000000</color>
+
+    <!-- AboutLibraries DEFAULT colors -->
+    <color name="about_libraries_window_background">#ECECEC</color>
+    <color name="about_libraries_card">#FAFAFA</color>
+    <color name="about_libraries_title_openSource">#B3B3B3</color>
+    <color name="about_libraries_text_openSource">#727272</color>
+    <color name="about_libraries_special_button_openSource">#212121</color>
+    <color name="about_libraries_dividerDark_openSource">#AAA</color>
+    <color name="about_libraries_dividerLight_openSource">#DADADA</color>
+
+    <color name="about_libraries_title_description">@color/about_libraries_title_openSource</color>
+    <color name="about_libraries_text_description">@color/about_libraries_text_openSource</color>
+    <color name="about_libraries_divider_description">@color/about_libraries_dividerDark_openSource</color>
+
+    <color name="material_drawer_background">#F9F9F9</color>
+    <!-- Material DEFAULT text / items colors -->
+    <color name="material_drawer_primary_text">#DE000000</color>
+    <color name="material_drawer_primary_icon">#8A000000</color>
+    <color name="material_drawer_secondary_text">#8A000000</color>
+    <color name="material_drawer_hint_text">#42000000</color>
+    <color name="material_drawer_divider">#1F000000</color>
+    <!-- Material DEFAULT drawer colors -->
+    <color name="material_drawer_selected">#1F2196F3</color>
+    <color name="material_drawer_selected_legacy">#E8E8E8</color>
+    <color name="material_drawer_selected_text">@color/material_drawer_primary</color>
+    <color name="material_drawer_header_selection_text">#DE000000</color>
+    <color name="material_drawer_header_selection_subtext">#8A000000</color>
+</resources>

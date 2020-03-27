@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="filter_types">
+        <item>Peaking</item>
+        <item>Low Pass</item>
+        <item>High Pass</item>
+        <item>Band Pass</item>
+        <item>Band Pass (peak gain = bw)</item>
+        <item>Notch</item>
+        <item>All Pass</item>
+        <item>Low Shelf</item>
+        <item>High Shelf</item>
+        <item>Unity Gain</item>
+        <item>One-Pole Low Pass</item>
+        <item>One-Pole High Pass</item>
+        <item>Custom</item>
+    </string-array>
+</resources>

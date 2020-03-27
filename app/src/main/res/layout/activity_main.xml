@@ -1,0 +1,74 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        tools:ignore="UnusedAttribute" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/crossfade_content"
+            android:orientation="vertical"
+            android:animateLayoutChanges="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.6"
+                android:id="@+id/listView_container"
+                android:orientation="vertical"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="6dp">
+                <ListView
+                    android:id="@+id/listView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbars="vertical"
+                    android:animateLayoutChanges="true">
+                </ListView>
+            </LinearLayout>
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="4dp"/>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:id="@+id/plotcard"
+                android:backgroundTint="@color/colorBackground_cardView"
+                android:layout_weight="0.4"
+                android:layout_marginTop="6dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginBottom="6dp"
+                android:layout_marginEnd="10dp"
+                app:cardCornerRadius="4dp">
+
+                <com.jjoe64.graphview.GraphView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/plot"
+                    android:layout_margin="16dp"/>
+
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </FrameLayout>
+</RelativeLayout>

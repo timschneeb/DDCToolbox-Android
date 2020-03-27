@@ -1,0 +1,55 @@
+<resources>
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/md_light_background</item>
+
+        <!-- MaterialDrawer specific values -->
+        <item name="material_drawer_background">@color/md_light_background</item>
+
+        <!-- AboutLibraries specific values -->
+        <item name="about_libraries_window_background">
+            @color/about_libraries_window_background
+        </item>
+        <item name="about_libraries_card">
+            @color/about_libraries_card
+        </item>
+        <item name="about_libraries_title_description">
+            @color/about_libraries_title_description
+        </item>
+        <item name="about_libraries_text_description">
+            @color/about_libraries_text_description
+        </item>
+        <item name="about_libraries_title_openSource">
+            @color/about_libraries_title_openSource
+        </item>
+        <item name="about_libraries_text_openSource">
+            @color/about_libraries_text_openSource
+        </item>
+        <item name="about_libraries_special_button_openSource">
+            @color/about_libraries_special_button_openSource
+        </item>
+        <item name="about_libraries_dividerDark_openSource">
+            @color/about_libraries_dividerDark_openSource
+        </item>
+        <item name="about_libraries_dividerLight_openSource">
+            @color/about_libraries_dividerLight_openSource
+        </item>
+    </style>
+
+    <style name="FilePickerAlertDialogTheme" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+</resources>

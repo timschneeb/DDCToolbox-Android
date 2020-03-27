@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorBackground">@color/md_dark_background</color>
+    <color name="colorBackground_cardView">@color/cardview_dark_background</color>
+
+    <color name="primaryText">@android:color/primary_text_dark</color>
+    <color name="secondaryText">@android:color/secondary_text_dark</color>
+    <color name="colorHint">#61FFFFFF</color>
+    <color name="midText">#20FFFFFF</color>
+
+    <!-- AboutLibraries DEFAULT colors -->
+    <color name="about_libraries_window_background">#303030</color>
+    <color name="about_libraries_card">#666666</color>
+    <color name="about_libraries_title_openSource">#ffffffff</color>
+    <color name="about_libraries_text_openSource">#DEDEDE</color>
+    <color name="about_libraries_special_button_openSource">#ffffffff</color>
+    <color name="about_libraries_dividerDark_openSource">#303030</color>
+    <color name="about_libraries_dividerLight_openSource">#303030</color>
+
+    <color name="material_drawer_background">#303030</color>
+    <!-- MaterialDrawer DEFAULT DARK text / items colors -->
+    <color name="material_drawer_primary_text">#DEFFFFFF</color>
+    <color name="material_drawer_primary_icon">#8AFFFFFF</color>
+    <color name="material_drawer_secondary_text">#8AFFFFFF</color>
+    <color name="material_drawer_hint_text">#42FFFFFF</color>
+    <color name="material_drawer_divider">#1FFFFFFF</color>
+    <!-- MaterialDrawer DEFAULT DARK drawer colors -->
+    <color name="material_drawer_selected">#1F2196F3</color>
+    <color name="material_drawer_selected_legacy">#202020</color>
+    <color name="material_drawer_selected_text">@color/material_drawer_primary</color>
+    <color name="material_drawer_header_selection_text">#FFFFFFFF</color>
+    <color name="material_drawer_header_selection_subtext">#B3FFFFFF</color>
+</resources>
