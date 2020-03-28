@@ -14,6 +14,7 @@ Of course, I couldn't include every feature found in the [desktop version](https
   * Import AutoEQ and (classic) VDC files
   * Editing/adding custom filters (you can still remove and inspect them)
   
-### Where can I get an APK?
-There isn't a release yet, so you'll have to compile it by yourself.
+### Where can I get the APK?
+You can download the lastest version in the [Release section](https://github.com/ThePBone/DDCToolbox-Android/releases)!
+
 I'm hoping to get a Google Play Dev Account to publish it on the Play Store soon.
