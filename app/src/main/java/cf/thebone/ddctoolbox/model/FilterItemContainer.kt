@@ -2,8 +2,10 @@ package cf.thebone.ddctoolbox.model
 
 class FilterItemContainer(private val list: ArrayList<FilterItem>) {
     fun getMagnitudeResponseTable(bandCount: Int, sampleRate: Double): ArrayList<Double> {
-        assert(bandCount > 0)
-        var table: ArrayList<Double> = ArrayList()
+        val table: ArrayList<Double> = ArrayList()
+        if(bandCount < 1)
+            return table;
+
         for (i in 0..bandCount)
         {
             val num3: Double = (sampleRate / 2.0) / bandCount
@@ -15,8 +17,10 @@ class FilterItemContainer(private val list: ArrayList<FilterItem>) {
         return table
     }
     fun getPhaseResponseTable(bandCount: Int, sampleRate: Double): ArrayList<Double> {
-        assert(bandCount > 0)
-        var table: ArrayList<Double> = ArrayList()
+        val table: ArrayList<Double> = ArrayList()
+        if(bandCount < 1)
+            return table;
+
         for (i in 0..bandCount)
         {
             val num3: Double = (sampleRate / 2.0) / bandCount
@@ -28,8 +32,10 @@ class FilterItemContainer(private val list: ArrayList<FilterItem>) {
         return table
     }
     fun getGroupDelayTable(bandCount: Int, sampleRate: Double): ArrayList<Double> {
-        assert(bandCount > 0)
-        var table: ArrayList<Double> = ArrayList()
+        val table: ArrayList<Double> = ArrayList()
+        if(bandCount < 1)
+            return table;
+
         for (i in 0..bandCount)
         {
             val num3: Double = (sampleRate / 2.0) / bandCount

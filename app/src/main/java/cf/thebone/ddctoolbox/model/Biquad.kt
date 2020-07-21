@@ -4,8 +4,9 @@ import cf.thebone.ddctoolbox.model.CustomFilterUnit
 import cf.thebone.ddctoolbox.model.FilterSpecification
 import cf.thebone.ddctoolbox.model.FilterType
 import cf.thebone.ddctoolbox.utils.RefObject
+import java.io.Serializable
 
-class Biquad {
+class Biquad : Serializable {
 
     private var internalBiquadCoeffs = DoubleArray(5)
     var bandwidthOrSlope: Double? = null

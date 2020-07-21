@@ -1,10 +1,20 @@
 package cf.thebone.ddctoolbox.editor
 
 import cf.thebone.ddctoolbox.model.FilterItem
+import cf.thebone.ddctoolbox.model.instance.UndoStackDataInstance
 
 class UndoStack {
     private var stack: ArrayList<BaseUndoCommand> = arrayListOf()
     private var seek: Int = 0
+
+    fun restoreInstance(instance: UndoStackDataInstance){
+        stack = instance.stack
+        seek = instance.seek
+    }
+
+    fun saveInstance(): UndoStackDataInstance{
+        return UndoStackDataInstance(stack, seek)
+    }
 
     fun canUndo(): Boolean{
         return stack.isNotEmpty() && seek >= 0

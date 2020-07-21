@@ -32,6 +32,7 @@ import cf.thebone.ddctoolbox.model.FilterItem
 import cf.thebone.ddctoolbox.model.FilterProvider
 import cf.thebone.ddctoolbox.model.FilterType
 import cf.thebone.ddctoolbox.model.PlotType
+import cf.thebone.ddctoolbox.model.instance.MainDataInstance
 import cf.thebone.ddctoolbox.utils.*
 import com.developer.filepicker.model.DialogConfigs
 import com.developer.filepicker.model.DialogProperties
@@ -425,7 +426,25 @@ class MainActivity : AppCompatActivity() {
 
         miniResult.withCrossFader(CrossfadeWrapper(crossFader))
 
-        plotEngine.populatePlot(PlotType.MAGNITUDE_RESPONSE)
+        if(savedInstanceState != null)
+        {
+            val instance: MainDataInstance = savedInstanceState.get("MainData") as MainDataInstance
+            projectManager.restoreInstance(instance.projectManagerDataInstance)
+            customHeader.projectName.text = projectManager.currentProjectName
+
+            FilterArrayUtils.restoreFilterItems(
+                listView.adapter as FilterListAdapter,
+                instance.filterItems
+            )
+            (listView.adapter as FilterListAdapter).sort(FilterComparator())
+            plotEngine.populatePlot(getSelectedPlotType())
+
+            undoStack.restoreInstance(instance.undoStackDataInstance)
+        }
+        else
+        {
+            plotEngine.populatePlot(PlotType.MAGNITUDE_RESPONSE)
+        }
 
         listView.visibility = View.VISIBLE
     }
@@ -458,6 +477,19 @@ class MainActivity : AppCompatActivity() {
         if (::crossFader.isInitialized) {
             outState = crossFader.saveInstanceState(outState)
         }
+
+        val filters = arrayListOf<FilterItem>()
+        for(i in 0 until listView.adapter.count)
+            filters.add(listView.adapter.getItem(i) as FilterItem)
+
+        outState.putSerializable("MainData",
+            MainDataInstance(
+                projectManager.saveInstance(),
+                undoStack.saveInstance(),
+                filters
+            )
+        )
+
         super.onSaveInstanceState(outState)
     }
 

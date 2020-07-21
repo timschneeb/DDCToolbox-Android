@@ -3,15 +3,14 @@ package cf.thebone.ddctoolbox.file
 import android.content.Context
 import android.net.Uri
 import android.os.Environment
-import androidx.core.net.toFile
 import cf.thebone.ddctoolbox.R
 import cf.thebone.ddctoolbox.file.io.ProjectExporter
 import cf.thebone.ddctoolbox.file.io.ProjectParser
 import cf.thebone.ddctoolbox.file.io.ProjectWriter
 import cf.thebone.ddctoolbox.model.FilterItem
+import cf.thebone.ddctoolbox.model.instance.ProjectManagerDataInstance
 import cf.thebone.ddctoolbox.utils.StringUtils
 import java.io.File
-import java.nio.file.Path
 
 
 class ProjectManager(private val context: Context){
@@ -22,6 +21,20 @@ class ProjectManager(private val context: Context){
     var isFileLoaded = false
         private set
     var isModified = false
+
+    fun saveInstance(): ProjectManagerDataInstance {
+        return ProjectManagerDataInstance(
+            currentProjectName, currentDirectoryName,
+            isFileLoaded, isModified
+        )
+    }
+
+    fun restoreInstance(instance: ProjectManagerDataInstance){
+        currentDirectoryName = instance.currentDirectoryName
+        currentProjectName = instance.currentProjectName
+        isFileLoaded = instance.isFileLoaded
+        isModified = instance.isModified
+    }
 
     fun load(path: String): ArrayList<FilterItem>?{
         isModified = false
