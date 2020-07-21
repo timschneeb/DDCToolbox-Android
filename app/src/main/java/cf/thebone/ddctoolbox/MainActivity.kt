@@ -39,6 +39,9 @@ import com.developer.filepicker.model.DialogProperties
 import com.developer.filepicker.view.FilePickerDialog
 import com.getkeepsafe.taptargetview.TapTarget
 import com.getkeepsafe.taptargetview.TapTargetSequence
+import com.github.javiersantos.appupdater.AppUpdater
+import com.github.javiersantos.appupdater.enums.Display
+import com.github.javiersantos.appupdater.enums.UpdateFrom
 import com.mikepenz.aboutlibraries.Libs
 import com.mikepenz.aboutlibraries.LibsBuilder
 import com.mikepenz.aboutlibraries.LibsConfiguration
@@ -444,6 +447,13 @@ class MainActivity : AppCompatActivity() {
         else
         {
             plotEngine.populatePlot(PlotType.MAGNITUDE_RESPONSE)
+
+            val appUpdater = AppUpdater(this)
+                .setDisplay(Display.DIALOG)
+                .setUpdateFrom(UpdateFrom.GITHUB)
+                .setGitHubUserAndRepo("ThePBone", "DDCToolbox-Android")
+                .setCancelable(false)
+            appUpdater.start()
         }
 
         listView.visibility = View.VISIBLE

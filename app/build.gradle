@@ -59,6 +59,7 @@ dependencies {
     implementation 'com.weiwangcn.betterspinner:library-material:1.1.0'
     implementation 'com.github.TutorialsAndroid:FilePicker:v7.0.19'
     implementation 'com.getkeepsafe.taptargetview:taptargetview:1.13.0'
+    implementation 'com.github.javiersantos:AppUpdater:2.7'
 
     implementation "com.mikepenz:aboutlibraries-core:7.1.0"
     implementation "com.mikepenz:aboutlibraries:7.1.0"
