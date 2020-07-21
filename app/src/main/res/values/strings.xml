@@ -84,4 +84,10 @@
     <string name="credits_description"><![CDATA[Create and edit VDC files on Android devices<br/>Author: <b>@ThePBone</b><br/>Contributor: <b>@james34602</b>]]></string>
     <string name="license">License</string>
     <string name="check_for_updates">Check for updates</string>
+    <string name="menu_deploy_vdc">Deploy to Viper/JamesDSP...</string>
+    <string name="deploy_jamesdsp">JamesDSP</string>
+    <string name="deploy_viper4android_legacy">Viper4Android (Legacy)</string>
+    <string name="deploy_viper4android_new_scoped">Viper4Android (Version 2.7.1.5 or later)</string>
+    <string name="deploy_no_target">No target selected</string>
+    <string name="deploy_no_target_desc">Please select at least one deployment target.</string>
 </resources>

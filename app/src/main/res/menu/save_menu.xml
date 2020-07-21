@@ -13,4 +13,9 @@
         android:id="@+id/exportVDC"
         android:orderInCategory="1"
         android:title="@string/menu_export_as_vdc" />
+
+    <item
+        android:id="@+id/deployVDC"
+        android:orderInCategory="1"
+        android:title="@string/menu_deploy_vdc" />
 </menu>

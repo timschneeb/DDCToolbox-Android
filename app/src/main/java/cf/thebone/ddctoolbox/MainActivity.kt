@@ -26,6 +26,7 @@ import cf.thebone.ddctoolbox.adapter.FilterComparator
 import cf.thebone.ddctoolbox.adapter.FilterListAdapter
 import cf.thebone.ddctoolbox.editor.UndoStack
 import cf.thebone.ddctoolbox.file.ProjectManager
+import cf.thebone.ddctoolbox.fragments.DeployFileFragment
 import cf.thebone.ddctoolbox.fragments.FilterEditorFragment
 import cf.thebone.ddctoolbox.fragments.SaveAsFileFragment
 import cf.thebone.ddctoolbox.model.FilterItem
@@ -387,6 +388,11 @@ class MainActivity : AppCompatActivity() {
                         R.id.exportVDC -> {
                             val dialog = SaveAsFileFragment(this@MainActivity,
                                 SaveAsFileFragment.Mode.ExportVDC)
+                            dialog.show(this@MainActivity.supportFragmentManager,dialog::javaClass.name)
+                            true
+                        }
+                        R.id.deployVDC -> {
+                            val dialog = DeployFileFragment(this@MainActivity)
                             dialog.show(this@MainActivity.supportFragmentManager,dialog::javaClass.name)
                             true
                         }
