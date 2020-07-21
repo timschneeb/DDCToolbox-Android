@@ -25,7 +25,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.bottom_sheet_save_content.*
 import kotlinx.android.synthetic.main.bottom_sheet_save_fragment.*
+import kotlinx.android.synthetic.main.custom_header.*
 import kotlinx.android.synthetic.main.custom_header.view.*
+import kotlinx.android.synthetic.main.custom_header.view.projectName
 import java.io.File
 
 
@@ -40,7 +42,7 @@ class SaveAsFileFragment(private val ctx: Context, private val mode: Mode) : Bot
 
     override fun onStart() {
         super.onStart()
-        view?.post {
+        view?.run {
             val parent = view?.parent as View
             parent.background =
                 ContextCompat.getDrawable(requireContext(), R.drawable.bg_bottomsheet)
@@ -63,7 +65,7 @@ class SaveAsFileFragment(private val ctx: Context, private val mode: Mode) : Bot
                 directoryInput.text = SpannableStringBuilder(if(defaultVDCdir.exists()) defaultVDCdir.toString()
                 else Environment.getExternalStorageDirectory().toString())
 
-                projectNameLabel.text = getString(R.string.vdc_name)
+                projectNameInput.hint = getString(R.string.vdc_name)
                 projectNameInput.text = SpannableStringBuilder(
                     StringUtils.stripExtension(ctx.projectManager.currentProjectName,".vdcprj")
                 )
@@ -71,7 +73,7 @@ class SaveAsFileFragment(private val ctx: Context, private val mode: Mode) : Bot
             else {
                 directoryInput.text =
                     SpannableStringBuilder(ctx.projectManager.currentDirectoryName)
-                projectNameLabel.text = getString(R.string.project_name)
+                projectNameInput.hint = getString(R.string.project_name)
                 projectNameInput.text = SpannableStringBuilder(ctx.projectManager.currentProjectName)
             }
 

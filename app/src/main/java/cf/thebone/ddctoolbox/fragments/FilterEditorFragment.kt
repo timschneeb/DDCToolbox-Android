@@ -41,7 +41,7 @@ class FilterEditorFragment : BottomSheetDialogFragment() {
 
     override fun onStart() {
         super.onStart()
-        view?.post {
+        view?.run {
             val parent = view?.parent as View
             parent.background =
                 ContextCompat.getDrawable(requireContext(), R.drawable.bg_bottomsheet)

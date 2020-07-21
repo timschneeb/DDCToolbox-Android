@@ -48,7 +48,7 @@
     <string name="invalid_path">Invalid path</string>
     <string name="directory_not_found">Directory does not exist</string>
     <string name="prompt_enter_project_name">Please enter a project name</string>
-    <string name="project_name">Project Name</string>
+    <string name="project_name">Filename</string>
     <string name="vdc_name">VDC Name</string>
     <string name="directory">Directory</string>
     <string name="browse_for_directory">Browse</string>
