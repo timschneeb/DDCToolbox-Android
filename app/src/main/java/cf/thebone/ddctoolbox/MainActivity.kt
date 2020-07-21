@@ -188,7 +188,8 @@ class MainActivity : AppCompatActivity() {
                 PrimaryDrawerItem().withName(getString(R.string.group_delay)).withIcon(GoogleMaterial.Icon.gmd_timer).withIdentifier(6),
                 PrimaryDrawerItem().withName(getString(R.string.plot_none)).withIcon(CommunityMaterial.Icon.cmd_border_none_variant).withIdentifier(7),
                 SectionDrawerItem().withName(getString(R.string.section_about)),
-                SecondaryDrawerItem().withName(getString(R.string.credits)).withIcon(GoogleMaterial.Icon.gmd_info_outline).withSelectable(false).withIdentifier(8)
+                SecondaryDrawerItem().withName(getString(R.string.check_for_updates)).withIcon(GoogleMaterial.Icon.gmd_system_update).withSelectable(false).withIdentifier(8),
+                SecondaryDrawerItem().withName(getString(R.string.credits)).withIcon(GoogleMaterial.Icon.gmd_info_outline).withSelectable(false).withIdentifier(9)
             )
             .withOnDrawerItemClickListener(object : Drawer.OnDrawerItemClickListener {
                 override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
@@ -258,6 +259,11 @@ class MainActivity : AppCompatActivity() {
                             plotcard?.visibility = View.GONE
                         }
                         8L -> {
+                            checkForUpdates(manual = true)
+                            if(crossFader.isCrossFaded())
+                                crossFader.crossFade()
+                        }
+                        9L -> {
                             LibsBuilder()
                                 .withAboutAppName(getString(R.string.app_name))
                                 .withActivityTitle(getString(R.string.credits))
@@ -447,16 +453,21 @@ class MainActivity : AppCompatActivity() {
         else
         {
             plotEngine.populatePlot(PlotType.MAGNITUDE_RESPONSE)
-
-            val appUpdater = AppUpdater(this)
-                .setDisplay(Display.DIALOG)
-                .setUpdateFrom(UpdateFrom.GITHUB)
-                .setGitHubUserAndRepo("ThePBone", "DDCToolbox-Android")
-                .setCancelable(false)
-            appUpdater.start()
+            checkForUpdates(manual = false)
         }
 
         listView.visibility = View.VISIBLE
+    }
+
+    fun checkForUpdates(manual: Boolean){
+        val appUpdater = AppUpdater(this)
+            .setDisplay(Display.DIALOG)
+            .setUpdateFrom(UpdateFrom.GITHUB)
+            .setGitHubUserAndRepo("ThePBone", "DDCToolbox-Android")
+            .setCancelable(false)
+            .showAppUpdated(manual)
+        appUpdater.start()
+
     }
 
     fun openNewTabWindow(urls: String, context: Context) {
