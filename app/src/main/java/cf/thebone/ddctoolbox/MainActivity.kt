@@ -40,9 +40,6 @@ import com.developer.filepicker.model.DialogProperties
 import com.developer.filepicker.view.FilePickerDialog
 import com.getkeepsafe.taptargetview.TapTarget
 import com.getkeepsafe.taptargetview.TapTargetSequence
-import com.github.javiersantos.appupdater.AppUpdater
-import com.github.javiersantos.appupdater.enums.Display
-import com.github.javiersantos.appupdater.enums.UpdateFrom
 import com.mikepenz.aboutlibraries.Libs
 import com.mikepenz.aboutlibraries.LibsBuilder
 import com.mikepenz.aboutlibraries.LibsConfiguration
@@ -64,6 +61,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.custom_header.view.*
 import java.io.File
 import kotlin.system.exitProcess
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var result: Drawer
@@ -126,14 +124,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        val mPrefs = PreferenceManager.getDefaultSharedPreferences(this)
-        if (!mPrefs.getBoolean(Constants.PrefKeys.tutorialShown, false)) {
-            showTutorialOnNextWindowFocus = true
-
-            val editor = mPrefs.edit()
-            editor.putBoolean(Constants.PrefKeys.tutorialShown, true);
-            editor.apply()
-        }
 
         listView.visibility = View.INVISIBLE
 
@@ -189,8 +179,7 @@ class MainActivity : AppCompatActivity() {
                 PrimaryDrawerItem().withName(getString(R.string.group_delay)).withIcon(GoogleMaterial.Icon.gmd_timer).withIdentifier(6),
                 PrimaryDrawerItem().withName(getString(R.string.plot_none)).withIcon(CommunityMaterial.Icon.cmd_border_none_variant).withIdentifier(7),
                 SectionDrawerItem().withName(getString(R.string.section_about)),
-                SecondaryDrawerItem().withName(getString(R.string.check_for_updates)).withIcon(GoogleMaterial.Icon.gmd_system_update).withSelectable(false).withIdentifier(8),
-                SecondaryDrawerItem().withName(getString(R.string.credits)).withIcon(GoogleMaterial.Icon.gmd_info_outline).withSelectable(false).withIdentifier(9)
+                SecondaryDrawerItem().withName(getString(R.string.credits)).withIcon(GoogleMaterial.Icon.gmd_info_outline).withSelectable(false).withIdentifier(8)
             )
             .withOnDrawerItemClickListener(object : Drawer.OnDrawerItemClickListener {
                 override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
@@ -260,11 +249,6 @@ class MainActivity : AppCompatActivity() {
                             plotcard?.visibility = View.GONE
                         }
                         8L -> {
-                            checkForUpdates(manual = true)
-                            if(crossFader.isCrossFaded())
-                                crossFader.crossFade()
-                        }
-                        9L -> {
                             LibsBuilder()
                                 .withAboutAppName(getString(R.string.app_name))
                                 .withActivityTitle(getString(R.string.credits))
@@ -281,7 +265,7 @@ class MainActivity : AppCompatActivity() {
                                     ): Boolean {
                                         when(specialButton.ordinal){
                                             0 -> openNewTabWindow("https://github.com/ThePBone/DDCToolbox-Android", this@MainActivity)
-                                            1 -> openNewTabWindow("https://t.me/ThePBone", this@MainActivity)
+                                            1 -> openNewTabWindow("https://t.cf/ThePBone", this@MainActivity)
                                             2 -> openNewTabWindow("https://github.com/ThePBone/DDCToolbox-Android/blob/master/LICENSE", this@MainActivity)
                                         }
                                         Log.i("tt",specialButton.ordinal.toString())
@@ -459,21 +443,20 @@ class MainActivity : AppCompatActivity() {
         else
         {
             plotEngine.populatePlot(PlotType.MAGNITUDE_RESPONSE)
-            checkForUpdates(manual = false)
+        }
+
+        val hasIntent = handleFileIntent(intent)
+
+        val mPrefs = PreferenceManager.getDefaultSharedPreferences(this)
+        if (!hasIntent && !mPrefs.getBoolean(Constants.PrefKeys.tutorialShown, false)) {
+            showTutorialOnNextWindowFocus = true
+
+            val editor = mPrefs.edit()
+            editor.putBoolean(Constants.PrefKeys.tutorialShown, true);
+            editor.apply()
         }
 
         listView.visibility = View.VISIBLE
-    }
-
-    fun checkForUpdates(manual: Boolean){
-        val appUpdater = AppUpdater(this)
-            .setDisplay(Display.DIALOG)
-            .setUpdateFrom(UpdateFrom.GITHUB)
-            .setGitHubUserAndRepo("ThePBone", "DDCToolbox-Android")
-            .setCancelable(false)
-            .showAppUpdated(manual)
-        appUpdater.start()
-
     }
 
     fun openNewTabWindow(urls: String, context: Context) {
@@ -546,7 +529,51 @@ class MainActivity : AppCompatActivity() {
         showTutorialOnNextWindowFocus = false
     }
 
-    fun showTutorial(){
+    private fun handleFileIntent(intent: Intent): Boolean {
+        val action = intent.action ?: return false
+
+        if (action.compareTo(Intent.ACTION_VIEW) == 0) {
+            val uri = intent.data ?: return false
+
+            val result: String = FileUtil(this).getPath(uri)
+
+            Log.v(
+                "IntentHandler",
+                "Content/file intent detected: " + action + " : " + intent.dataString + " : " + intent.type + " : " + result
+            );
+
+            /* Verify VDCPRJ file */
+            val cut = result.lastIndexOf('/')
+            if (cut != -1) {
+                if(!result.substring(cut + 1).contains(".vdcprj")){
+                    val builder = AlertDialog.Builder(this)
+                    builder.setMessage("This file is not a VDC project. Make sure to only select files with the file extension '*.vdcprj'")
+                    builder.setTitle("Invalid file")
+                    builder.setIcon(R.drawable.ic_error_outline)
+                    builder.setCancelable(true)
+                    builder.setPositiveButton(android.R.string.ok, null)
+                    builder.create().show()
+                    return true;
+                }
+            }
+
+            /* Load project file */
+            val state = projectManager.load(result)
+            customHeader.projectName.text = projectManager.currentProjectName
+            FilterArrayUtils.restoreFilterItems(
+                listView.adapter as FilterListAdapter,
+                state
+            )
+            (listView.adapter as FilterListAdapter).sort(FilterComparator())
+            plotEngine.populatePlot(getSelectedPlotType())
+            undoStack.clearStack()
+
+            return true;
+        }
+        return false;
+    }
+
+    private fun showTutorial(){
         val listView = findViewById<ListView>(R.id.listView)
 
         FilterArrayUtils.restoreFilterItems(

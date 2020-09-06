@@ -2,7 +2,6 @@ package cf.thebone.ddctoolbox.utils
 
 import android.text.InputFilter
 import android.text.Spanned
-import android.util.Log
 
 class DoubleRangeInputFilter : InputFilter {
 

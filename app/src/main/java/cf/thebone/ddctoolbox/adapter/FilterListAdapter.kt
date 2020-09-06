@@ -12,7 +12,6 @@ import cf.thebone.ddctoolbox.fragments.FilterEditorFragment
 import cf.thebone.ddctoolbox.model.FilterItem
 import cf.thebone.ddctoolbox.model.FilterType
 import cf.thebone.ddctoolbox.utils.FilterArrayUtils
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.filter_item.view.*
 import kotlinx.android.synthetic.main.filter_item_content.view.*
 import java.util.*

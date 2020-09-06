@@ -1,6 +1,5 @@
 package cf.thebone.ddctoolbox.fragments
 
-import android.content.DialogInterface
 import cf.thebone.ddctoolbox.R
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -17,14 +16,12 @@ import kotlinx.android.synthetic.main.bottom_sheet_edit_content.*
 import cf.thebone.ddctoolbox.utils.IntRangeInputFilter
 import android.text.InputFilter
 import android.text.SpannableStringBuilder
-import android.util.Log
 import cf.thebone.ddctoolbox.utils.DoubleRangeInputFilter
 import kotlinx.android.synthetic.main.bottom_sheet_edit_fragment.*
 import androidx.appcompat.app.AlertDialog
 import cf.thebone.ddctoolbox.model.FilterSpecification
 import cf.thebone.ddctoolbox.model.FilterType
 import android.widget.AdapterView
-import androidx.recyclerview.widget.RecyclerView
 
 class FilterEditorFragment : BottomSheetDialogFragment() {
 

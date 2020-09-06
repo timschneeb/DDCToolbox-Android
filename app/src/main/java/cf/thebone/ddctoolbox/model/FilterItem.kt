@@ -1,7 +1,6 @@
 package cf.thebone.ddctoolbox.model
 
 import Biquad
-import cf.thebone.ddctoolbox.R
 import java.io.Serializable
 
 class FilterItem() : Serializable {
