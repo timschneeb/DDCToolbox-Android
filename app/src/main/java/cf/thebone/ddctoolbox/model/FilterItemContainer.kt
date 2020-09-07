@@ -10,8 +10,10 @@ class FilterItemContainer(private val list: ArrayList<FilterItem>) {
         {
             val num3: Double = (sampleRate / 2.0) / bandCount
             var value = 0.0
-            for (j in 0 until list.size)
-                value += (list[j].filter.GainAt(num3 * (i + 1.0), sampleRate))
+            for (j in 0 until list.size) {
+                if(list[j].isValid())
+                    value += (list[j].filter.GainAt(num3 * (i + 1.0), sampleRate))
+            }
             table.add(value)
         }
         return table
@@ -26,7 +28,8 @@ class FilterItemContainer(private val list: ArrayList<FilterItem>) {
             val num3: Double = (sampleRate / 2.0) / bandCount
             var value = 0.0
             for (j in 0 until list.size)
-                value += (list[j].filter.PhaseResponseAt(num3 * (i + 1.0), sampleRate))
+                if(list[j].isValid())
+                    value += (list[j].filter.PhaseResponseAt(num3 * (i + 1.0), sampleRate))
             table.add(value)
         }
         return table
@@ -41,7 +44,8 @@ class FilterItemContainer(private val list: ArrayList<FilterItem>) {
             val num3: Double = (sampleRate / 2.0) / bandCount
             var value = 0.0
             for (j in 0 until list.size)
-                value += (list[j].filter.GroupDelayAt(num3 * (i + 1.0), sampleRate))
+                if(list[j].isValid())
+                    value += (list[j].filter.GroupDelayAt(num3 * (i + 1.0), sampleRate))
             table.add(value)
         }
         return table

@@ -43,7 +43,7 @@ class FilterListAdapter(items: ArrayList<FilterItem>, private val ctx: Context) 
             view = inflater.inflate(R.layout.filter_item, viewGroup, false)
 
             view.header.setOnClickListener {
-                if(getItem(i)?.filter?.type != FilterType.INVALID)
+                if(getItem(i)?.filter?.type ?: FilterType.INVALID != FilterType.INVALID)
                     view.expandableLayout.toggle(true)
             }
         }

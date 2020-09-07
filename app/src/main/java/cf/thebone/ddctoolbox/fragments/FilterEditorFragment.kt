@@ -164,7 +164,7 @@ class FilterEditorFragment : BottomSheetDialogFragment() {
             , container, false)
     }
 
-    fun updateInputState(filter: FilterType = FilterType.toFilter(filterType.text.toString())){
+    private fun updateInputState(filter: FilterType = FilterType.toFilter(filterType.text.toString())){
         val specs = FilterSpecification(filter)
         frequencyInput.isEnabled = specs.requiresFrequency
         bandwidthInput.isEnabled = specs.requiresBandwidth

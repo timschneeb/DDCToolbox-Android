@@ -393,6 +393,9 @@ class Biquad : Serializable {
                 ExportCoeffs(type, custom48!!)
             else LinkedList()
         }
+        else if(type == FilterType.INVALID)
+            return LinkedList()
+
         return ExportCoeffs(
             type,
             gain,

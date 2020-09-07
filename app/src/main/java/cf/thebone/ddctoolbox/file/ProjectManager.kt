@@ -15,11 +15,11 @@ import java.io.File
 
 class ProjectManager(private val context: Context){
     var currentProjectName = context.getString(R.string.untitled)
-        private set
+
     var currentDirectoryName = Environment.getExternalStorageDirectory().toString()
         private set
     var isFileLoaded = false
-        private set
+
     var isModified = false
 
     fun saveInstance(): ProjectManagerDataInstance {
@@ -47,7 +47,6 @@ class ProjectManager(private val context: Context){
     }
     fun save(list: ArrayList<FilterItem>): Boolean?{
         isModified = false
-        isFileLoaded = true
         if(!isFileLoaded || currentDirectoryName == "" || currentProjectName == "" ||
             currentProjectName == "Untitled" || !File(currentDirectoryName).exists())
             return null

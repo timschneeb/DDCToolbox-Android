@@ -84,10 +84,19 @@
     <string name="credits_description"><![CDATA[Create and edit VDC files on Android devices<br/>Author: <b>@ThePBone</b><br/>Contributor: <b>@james34602</b>]]></string>
     <string name="license">License</string>
     <string name="check_for_updates">Check for updates</string>
-    <string name="menu_deploy_vdc">Deploy to Viper/JamesDSP...</string>
+    <string name="menu_deploy_vdc">Deploy to Viper/JamesDSP</string>
     <string name="deploy_jamesdsp">JamesDSP</string>
     <string name="deploy_viper4android_legacy">Viper4Android (Legacy)</string>
     <string name="deploy_viper4android_new_scoped">Viper4Android (Version 2.7.1.5 or later)</string>
     <string name="deploy_no_target">No target selected</string>
     <string name="deploy_no_target_desc">Please select at least one deployment target.</string>
+    <string name="menu_load_project">Load project</string>
+    <string name="menu_import_from_autoeq">Import AutoEQ file</string>
+    <string name="select_autoeq_file_dialog_title">Select a \"ParametricEQ.txt\" file</string>
+    <string name="autoeq_import_no_data_title">No valid data found</string>
+    <string name="autoeq_import_no_data">The selected file contained no valid data.\n%1$d error(s) occurred while converting this file.</string>
+    <string name="autoeq_import_skipped_warning">The parser skipped %1$d line(s) that contained unknown/invalid data</string>
+    <string name="autoeq_import_skipped_warning_title">Imported with warnings</string>
+    <string name="category_utilities">Utilities</string>
+    <string name="check_filter_stability">Check filter stability</string>
 </resources>

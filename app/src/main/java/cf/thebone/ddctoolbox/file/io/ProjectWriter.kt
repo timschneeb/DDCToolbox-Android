@@ -38,6 +38,10 @@ class ProjectWriter {
 
     fun writeSingleLine(item: FilterItem, count: Int, backwardsCompatible: Boolean = false): String {
         item.handleNullStates()
+
+        if(!item.isValid())
+            return ""
+
         return when {
             backwardsCompatible -> "# Calibration Point $count\n" +
                     "${item.filter.frequency},${item.filter.bandwidthOrSlope},${item.filter.gain}\n"

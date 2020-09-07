@@ -1,6 +1,7 @@
 package cf.thebone.ddctoolbox.file.io
 
 import cf.thebone.ddctoolbox.model.FilterItem
+import cf.thebone.ddctoolbox.model.FilterType
 import java.io.File
 import java.io.IOException
 
@@ -39,6 +40,10 @@ class ProjectExporter {
 
     fun writeSingleFilter(item: FilterItem, samplerate: Double): String{
         var str = ""
+
+        if(!item.isValid())
+            return str
+
         val coeffs = item.filter.ExportCoeffs(samplerate)
         for((counter, coeff) in coeffs.withIndex()) {
             str += coeff.toString()
