@@ -184,7 +184,7 @@ class MainActivity : AppCompatActivity() {
             .withToolbar(toolbar)
             .withTranslucentStatusBar(false)
             .withHeader(customHeader)
-            .withSelectedItem(4)
+            .withSelectedItem(100) /* Select magnitude response plot */
             .addDrawerItems(
                 PrimaryDrawerItem().withName(getString(R.string.add_filter))
                     .withIcon(GoogleMaterial.Icon.gmd_add).withIdentifier(1).withSelectable(false)
@@ -196,22 +196,22 @@ class MainActivity : AppCompatActivity() {
 
                 PrimaryDrawerItem().withName(getString(R.string.check_filter_stability))
                     .withIcon(CommunityMaterial.Icon.cmd_alert_circle_check_outline).withSelectable(false)
-                    .withIdentifier(8),
+                    .withIdentifier(4),
 
                 SectionDrawerItem().withName(getString(R.string.category_plots)),
                 PrimaryDrawerItem().withName(getString(R.string.magnitude_response))
-                    .withIcon(GoogleMaterial.Icon.gmd_graphic_eq).withIdentifier(4),
+                    .withIcon(GoogleMaterial.Icon.gmd_graphic_eq).withIdentifier(100),
                 PrimaryDrawerItem().withName(getString(R.string.phase_response))
-                    .withIcon(CommunityMaterial.Icon.cmd_chart_bell_curve).withIdentifier(5),
+                    .withIcon(CommunityMaterial.Icon.cmd_chart_bell_curve).withIdentifier(101),
                 PrimaryDrawerItem().withName(getString(R.string.group_delay))
-                    .withIcon(GoogleMaterial.Icon.gmd_timer).withIdentifier(6),
+                    .withIcon(GoogleMaterial.Icon.gmd_timer).withIdentifier(102),
                 PrimaryDrawerItem().withName(getString(R.string.plot_none))
-                    .withIcon(CommunityMaterial.Icon.cmd_border_none_variant).withIdentifier(7),
+                    .withIcon(CommunityMaterial.Icon.cmd_border_none_variant).withIdentifier(103),
 
                 SectionDrawerItem().withName(getString(R.string.section_about)),
                 SecondaryDrawerItem().withName(getString(R.string.credits))
                     .withIcon(GoogleMaterial.Icon.gmd_info_outline).withSelectable(false)
-                    .withIdentifier(9)
+                    .withIdentifier(1000)
             )
             .withOnDrawerItemClickListener(object : Drawer.OnDrawerItemClickListener {
                 override fun onItemClick(
@@ -280,27 +280,30 @@ class MainActivity : AppCompatActivity() {
                             plotEngine.populatePlot(getSelectedPlotType())
                         }
                         4L -> {
+                            showFilterStabilityReport()
+                        }
+                        100L -> {
                             plot?.gridLabelRenderer?.verticalAxisTitle =
                                 getString(R.string.plot_axis_gain)
                             plotEngine.populatePlot(getSelectedPlotType())
                             plotcard?.visibility = View.VISIBLE
                         }
-                        5L -> {
+                        101L -> {
                             plot?.gridLabelRenderer?.verticalAxisTitle =
                                 getString(R.string.plot_axis_phase)
                             plotEngine.populatePlot(getSelectedPlotType())
                             plotcard?.visibility = View.VISIBLE
                         }
-                        6L -> {
+                        102L -> {
                             plot?.gridLabelRenderer?.verticalAxisTitle =
                                 getString(R.string.plot_axis_delay)
                             plotEngine.populatePlot(getSelectedPlotType())
                             plotcard?.visibility = View.VISIBLE
                         }
-                        7L -> {
+                        103L -> {
                             plotcard?.visibility = View.GONE
                         }
-                        9L -> {
+                        1000L -> {
                             showCredits()
                         }
                         else -> {
@@ -340,93 +343,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         customHeader.saveProject.setOnClickListener {
-            val popup = PopupMenu(this, customHeader.saveProject).apply {
-                setOnMenuItemClickListener {
-                    if ((listView.adapter as FilterListAdapter).isListEmpty()) {
-                        val builder = AlertDialog.Builder(this@MainActivity)
-                        builder.setMessage(getString(R.string.note_empty_project))
-                            .setTitle(getString(R.string.no_filters))
-                            .setNegativeButton(getString(android.R.string.ok)) { dialog: DialogInterface, _: Int ->
-                                dialog.dismiss()
-                            }
-                            .show()
-                        return@setOnMenuItemClickListener true
-                    }
-
-                    if (crossFader.isCrossFaded())
-                        crossFader.crossFade()
-
-                    return@setOnMenuItemClickListener when (it.itemId) {
-                        R.id.save -> {
-                            val filters = arrayListOf<FilterItem>()
-                            for (i in 0 until listView.adapter.count)
-                                filters.add(listView.adapter.getItem(i) as FilterItem)
-
-                            //Attempt quick save
-                            val result = projectManager.save(filters)
-                            when {
-                                result == null -> {
-                                    //Output path not yet specified -> display SaveAsFragment
-                                    val dialog = SaveAsFileFragment(
-                                        this@MainActivity,
-                                        SaveAsFileFragment.Mode.SaveAs
-                                    )
-                                    dialog.show(
-                                        this@MainActivity.supportFragmentManager,
-                                        dialog::javaClass.name
-                                    )
-                                }
-                                //result is true
-                                result -> Toast.makeText(
-                                    this@MainActivity,
-                                    getString(R.string.toast_project_saved),
-                                    Toast.LENGTH_SHORT
-                                )
-                                //result is false
-                                else -> Toast.makeText(
-                                    this@MainActivity,
-                                    getString(R.string.toast_project_not_saved), Toast.LENGTH_SHORT
-                                )
-                            }
-                            true
-                        }
-                        R.id.saveAs -> {
-                            val dialog = SaveAsFileFragment(
-                                this@MainActivity,
-                                SaveAsFileFragment.Mode.SaveAs
-                            )
-                            dialog.show(
-                                this@MainActivity.supportFragmentManager,
-                                dialog::javaClass.name
-                            )
-                            true
-                        }
-                        R.id.exportVDC -> {
-                            val dialog = SaveAsFileFragment(
-                                this@MainActivity,
-                                SaveAsFileFragment.Mode.ExportVDC
-                            )
-                            dialog.show(
-                                this@MainActivity.supportFragmentManager,
-                                dialog::javaClass.name
-                            )
-                            true
-                        }
-                        R.id.deployVDC -> {
-                            val dialog = DeployFileFragment(this@MainActivity)
-                            dialog.show(
-                                this@MainActivity.supportFragmentManager,
-                                dialog::javaClass.name
-                            )
-                            true
-                        }
-                        else -> false
-                    }
-                }
-            }
-            val inflater: MenuInflater = popup.menuInflater
-            inflater.inflate(R.menu.save_menu, popup.menu)
-            popup.show()
+            requestSaveMenu()
         }
 
         customHeader.closeProject.setOnClickListener {
@@ -508,9 +425,9 @@ class MainActivity : AppCompatActivity() {
 
     fun getSelectedPlotType(): PlotType {
         return when (result.currentSelection) {
-            4L -> PlotType.MAGNITUDE_RESPONSE
-            5L -> PlotType.PHASE_RESPONSE
-            6L -> PlotType.GROUP_DELAY
+            100L -> PlotType.MAGNITUDE_RESPONSE
+            101L -> PlotType.PHASE_RESPONSE
+            102L -> PlotType.GROUP_DELAY
             else -> PlotType.NONE
         }
     }
@@ -692,6 +609,135 @@ class MainActivity : AppCompatActivity() {
             return true;
         }
         return false;
+    }
+
+    private fun requestSaveMenu(){
+        val popup = PopupMenu(this, customHeader.saveProject).apply {
+            setOnMenuItemClickListener {
+                if ((listView.adapter as FilterListAdapter).isListEmpty()) {
+                    val builder = AlertDialog.Builder(this@MainActivity)
+                    builder.setMessage(getString(R.string.note_empty_project))
+                        .setTitle(getString(R.string.no_filters))
+                        .setNegativeButton(getString(android.R.string.ok)) { dialog: DialogInterface, _: Int ->
+                            dialog.dismiss()
+                        }
+                        .show()
+                    return@setOnMenuItemClickListener true
+                }
+
+                if (crossFader.isCrossFaded())
+                    crossFader.crossFade()
+
+                return@setOnMenuItemClickListener when (it.itemId) {
+                    R.id.save -> {
+                        val filters = arrayListOf<FilterItem>()
+                        for (i in 0 until listView.adapter.count)
+                            filters.add(listView.adapter.getItem(i) as FilterItem)
+
+                        //Attempt quick save
+                        val result = projectManager.save(filters)
+                        when {
+                            result == null -> {
+                                //Output path not yet specified -> display SaveAsFragment
+                                val dialog = SaveAsFileFragment(
+                                    this@MainActivity,
+                                    SaveAsFileFragment.Mode.SaveAs
+                                )
+                                dialog.show(
+                                    this@MainActivity.supportFragmentManager,
+                                    dialog::javaClass.name
+                                )
+                            }
+                            //result is true
+                            result -> Toast.makeText(
+                                this@MainActivity,
+                                getString(R.string.toast_project_saved),
+                                Toast.LENGTH_SHORT
+                            )
+                            //result is false
+                            else -> Toast.makeText(
+                                this@MainActivity,
+                                getString(R.string.toast_project_not_saved), Toast.LENGTH_SHORT
+                            )
+                        }
+                        true
+                    }
+                    R.id.saveAs -> {
+                        val dialog = SaveAsFileFragment(
+                            this@MainActivity,
+                            SaveAsFileFragment.Mode.SaveAs
+                        )
+                        dialog.show(
+                            this@MainActivity.supportFragmentManager,
+                            dialog::javaClass.name
+                        )
+                        true
+                    }
+                    R.id.exportVDC -> {
+                        val dialog = SaveAsFileFragment(
+                            this@MainActivity,
+                            SaveAsFileFragment.Mode.ExportVDC
+                        )
+                        dialog.show(
+                            this@MainActivity.supportFragmentManager,
+                            dialog::javaClass.name
+                        )
+                        true
+                    }
+                    R.id.deployVDC -> {
+                        val dialog = DeployFileFragment(this@MainActivity)
+                        dialog.show(
+                            this@MainActivity.supportFragmentManager,
+                            dialog::javaClass.name
+                        )
+                        true
+                    }
+                    else -> false
+                }
+            }
+        }
+        val inflater: MenuInflater = popup.menuInflater
+        inflater.inflate(R.menu.save_menu, popup.menu)
+        popup.show()
+    }
+
+    private fun showFilterStabilityReport(){
+        if ((listView.adapter as FilterListAdapter).isListEmpty()) {
+            DialogUtils.showDialog(
+                this@MainActivity,
+                getString(R.string.no_filters),
+                getString(R.string.note_empty_project))
+            return
+        }
+
+        if (crossFader.isCrossFaded())
+            crossFader.crossFade()
+
+        var result = ""
+        for (i in 0 until listView.adapter.count) {
+            val filter = (listView.adapter.getItem(i) as FilterItem).filter
+            result += when (filter.isStable) {
+                0 -> getString(
+                    R.string.filter_stablity_pole_outside_unit_circle,
+                    FilterType.toString(filter.type),
+                    filter.frequency
+                ) + "\n"
+                2 -> getString(
+                    R.string.filter_stablity_pole_approaching_unit_circle,
+                    FilterType.toString(filter.type),
+                    filter.frequency
+                ) + "\n"
+                else -> ""
+            }
+        }
+
+        if(result.isEmpty())
+            result = getString(R.string.filter_stability_all_stable);
+
+        DialogUtils.showDialog(
+            this@MainActivity,
+            getString(R.string.filter_stability_report_title),
+            result)
     }
 
     private fun showTutorial(){
