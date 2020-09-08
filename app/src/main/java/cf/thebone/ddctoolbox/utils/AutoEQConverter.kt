@@ -7,8 +7,6 @@ import com.google.code.regexp.Pattern
 import java.lang.Math.pow
 import kotlin.math.*
 
-data class AEQConversionResult(val data: Any, val failedCount: Int);
-
 object AutoEQConverter {
 
     fun toFilterItems(input: String): AEQConversionResult{
@@ -35,7 +33,7 @@ object AutoEQConverter {
             if( freq == null || gain == null || q == null){
                 Log.w("AutoEQConverter", "Unable to parse values: '${line}'")
                 failed += 1
-                continue;
+                continue
             }
 
             if(freq < 0) {
@@ -55,3 +53,5 @@ object AutoEQConverter {
         return AEQConversionResult(filters, failed)
     }
 }
+
+data class AEQConversionResult(val data: Any, val failedCount: Int)

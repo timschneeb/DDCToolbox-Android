@@ -101,4 +101,19 @@
     <string name="check_filter_stability">Check filter stability</string>
     <string name="filter_stability_all_stable">All filters appear to be stable</string>
     <string name="filter_stability_report_title">Filter stability report</string>
+
+    <string name="autoeq_search_introduction">Enter a device name…</string>
+    <string name="menu_download_from_autoeq">Download from AutoEQ</string>
+    <string name="menu_search">Search</string>
+    <string name="no_results_found">No results found</string>
+    <string name="autoeq_error_rate_limit_title">Rate limit exceeded</string>
+    <string name="autoeq_error_rate_limit">You are being rate-limited by GitHub.\nGitHub only allows 60 unauthenticated requests per hour to their API servers (per IP-address).\n\nPlease wait until this limit expires or download and import the file manually.\n\n(This only affects the download URL grabber, you can perform unlimited search queries.)</string>
+    <string name="autoeq_error_general_api_title">GitHub API Error</string>
+    <string name="autoeq_error_invalid_response_title">Invalid API response</string>
+    <string name="autoeq_error_invalid_response">GitHub returned malformed JSON data</string>
+    <string name="autoeq_error_download_failed_title">Download failed</string>
+    <string name="autoeq_error_download_failed">Failed to download the ParametricEQ.txt file from GitHub</string>
+    <string name="autoeq_error_empty_response_title">No suitable data found</string>
+    <string name="autoeq_error_empty_response">Your selection has no ParametricEQ.txt file available or returned an empty response</string>
+    <string name="autoeq_error_network_title">Network error</string>
 </resources>

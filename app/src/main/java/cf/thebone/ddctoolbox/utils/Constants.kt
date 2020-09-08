@@ -2,9 +2,12 @@ package cf.thebone.ddctoolbox.utils
 
 object Constants {
     object PrefKeys{
-        val tutorialShown = "tutorialShown"
+        const val tutorialShown = "tutorialShown"
     }
     object PermissionRequests{
-        val writeStorage = 0
+        const val writeStorage = 0
+    }
+    object ActivityReturnCodes{
+        const val autoEqSelection = 0
     }
 }

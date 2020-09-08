@@ -6,6 +6,8 @@
     <color name="colorBackground">@android:color/background_light</color>
     <color name="colorBackground_cardView">@color/cardview_light_background</color>
 
+    <color name="grayedOut">#d3d3d3</color>
+
     <color name="primaryText">#212121</color>
     <color name="secondaryText">#757575</color>
     <color name="midText">#20000000</color>

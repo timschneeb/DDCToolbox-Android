@@ -10,4 +10,9 @@
         android:orderInCategory="1"
         android:title="@string/menu_import_from_autoeq" />
 
+    <item
+        android:id="@+id/downloadAutoEq"
+        android:orderInCategory="1"
+        android:title="@string/menu_download_from_autoeq" />
+
 </menu>

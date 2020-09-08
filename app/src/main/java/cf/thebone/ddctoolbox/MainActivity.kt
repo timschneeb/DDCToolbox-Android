@@ -1,6 +1,7 @@
 package cf.thebone.ddctoolbox
 
 import android.Manifest
+import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
@@ -14,7 +15,6 @@ import android.util.Log
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.widget.Filter
 import android.widget.ListView
 import android.widget.PopupMenu
 import android.widget.Toast
@@ -23,8 +23,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.preference.PreferenceManager
+import cf.thebone.ddctoolbox.activity.AutoEqSelectionActivity
 import cf.thebone.ddctoolbox.adapter.FilterComparator
 import cf.thebone.ddctoolbox.adapter.FilterListAdapter
+import cf.thebone.ddctoolbox.api.model.AEQDetails
 import cf.thebone.ddctoolbox.editor.UndoStack
 import cf.thebone.ddctoolbox.file.ProjectManager
 import cf.thebone.ddctoolbox.file.io.GenericFileIO
@@ -318,28 +320,7 @@ class MainActivity : AppCompatActivity() {
             .buildView()
 
         customHeader.openProject.setOnClickListener {
-            val popup = PopupMenu(this, customHeader.openProject).apply {
-                setOnMenuItemClickListener {
-
-                    if (crossFader.isCrossFaded())
-                        crossFader.crossFade()
-
-                    return@setOnMenuItemClickListener when (it.itemId) {
-                        R.id.load -> {
-                            selectProjectFile()
-                            true
-                        }
-                        R.id.importAutoEq -> {
-                            selectAutoEQFile()
-                            true
-                        }
-                        else -> false
-                    }
-                }
-            }
-            val inflater: MenuInflater = popup.menuInflater
-            inflater.inflate(R.menu.load_menu, popup.menu)
-            popup.show()
+            requestLoadMenu()
         }
 
         customHeader.saveProject.setOnClickListener {
@@ -484,6 +465,21 @@ class MainActivity : AppCompatActivity() {
         showTutorialOnNextWindowFocus = false
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        when (requestCode) {
+            Constants.ActivityReturnCodes.autoEqSelection -> {
+                if (resultCode == Activity.RESULT_OK) {
+                    val result = data?.getSerializableExtra("result") as AEQDetails
+                    importAutoEQFile(
+                        result.parametric_filename,
+                        result.parametric_content
+                    )
+                }
+            }
+            else -> super.onActivityResult(requestCode, resultCode, data)
+        }
+    }
+
     private fun selectProjectFile(){
         val properties = DialogProperties()
         properties.selection_mode = DialogConfigs.SINGLE_MODE
@@ -530,43 +526,50 @@ class MainActivity : AppCompatActivity() {
         dialog.setDialogSelectionListener {
             if (it.isEmpty()) return@setDialogSelectionListener
 
-            val result = AutoEQConverter.toFilterItems(GenericFileIO.read(it.first()) ?: "")
-            val filters = result.data as ArrayList<FilterItem>
-
-            if(filters.count() < 1){
-                DialogUtils.showDialog(this,
-                    getString(R.string.autoeq_import_no_data_title),
-                    getString(R.string.autoeq_import_no_data, result.failedCount),
-                    R.drawable.ic_error_outline
-                )
-            }
-            else if(result.failedCount > 0){
-                DialogUtils.showDialog(this,
-                    getString(R.string.autoeq_import_skipped_warning_title),
-                    getString(R.string.autoeq_import_skipped_warning, result.failedCount),
-                    R.drawable.ic_error_outline
-                )
-            }
-
-            projectManager.close()
-
-            FilterArrayUtils.restoreFilterItems(
-                listView.adapter as FilterListAdapter,
-                filters
+            importAutoEQFile(
+                it.first().substring(it.first().lastIndexOf("/") + 1),
+                GenericFileIO.read(it.first())
             )
-            (listView.adapter as FilterListAdapter).sort(FilterComparator())
-            plotEngine.populatePlot(getSelectedPlotType())
-            undoStack.clearStack()
-
-            val filename = it.first().substring(it.first().lastIndexOf("/") + 1)
-            projectManager.currentProjectName = filename.replace("ParametricEQ.txt", "")
-                .replace("FixedBandEQ.txt", "").replace(".txt", "").trim()
-            customHeader.projectName.text = projectManager.currentProjectName
 
             if (crossFader.isCrossFaded())
                 crossFader.crossFade()
         }
         dialog.show()
+    }
+
+    private fun importAutoEQFile(name: String, content: String?){
+        val result = AutoEQConverter.toFilterItems(content ?: "")
+        val filters = result.data as ArrayList<FilterItem>
+
+        if(filters.count() < 1){
+            DialogUtils.showDialog(this,
+                getString(R.string.autoeq_import_no_data_title),
+                getString(R.string.autoeq_import_no_data, result.failedCount),
+                R.drawable.ic_error_outline
+            )
+        }
+        else if(result.failedCount > 0){
+            DialogUtils.showDialog(this,
+                getString(R.string.autoeq_import_skipped_warning_title),
+                getString(R.string.autoeq_import_skipped_warning, result.failedCount),
+                R.drawable.ic_error_outline
+            )
+        }
+
+        projectManager.close()
+
+        FilterArrayUtils.restoreFilterItems(
+            listView.adapter as FilterListAdapter,
+            filters
+        )
+        (listView.adapter as FilterListAdapter).sort(FilterComparator())
+        plotEngine.populatePlot(getSelectedPlotType())
+        undoStack.clearStack()
+
+        projectManager.currentProjectName = name.replace("ParametricEQ.txt", "")
+            .replace("FixedBandEQ.txt", "").replace(".txt", "").trim()
+        customHeader.projectName.text = projectManager.currentProjectName
+
     }
 
     private fun handleFileIntent(intent: Intent): Boolean {
@@ -609,6 +612,38 @@ class MainActivity : AppCompatActivity() {
             return true;
         }
         return false;
+    }
+
+    private fun requestLoadMenu(){
+        val popup = PopupMenu(this, customHeader.openProject).apply {
+            setOnMenuItemClickListener {
+
+                if (crossFader.isCrossFaded())
+                    crossFader.crossFade()
+
+                return@setOnMenuItemClickListener when (it.itemId) {
+                    R.id.load -> {
+                        selectProjectFile()
+                        true
+                    }
+                    R.id.importAutoEq -> {
+                        selectAutoEQFile()
+                        true
+                    }
+                    R.id.downloadAutoEq -> {
+                        startActivityForResult(
+                            Intent(this@MainActivity, AutoEqSelectionActivity::class.java),
+                            Constants.ActivityReturnCodes.autoEqSelection
+                        )
+                        true
+                    }
+                    else -> false
+                }
+            }
+        }
+        val inflater: MenuInflater = popup.menuInflater
+        inflater.inflate(R.menu.load_menu, popup.menu)
+        popup.show()
     }
 
     private fun requestSaveMenu(){

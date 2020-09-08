@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="colorAccent">#4093F3</color>
+
     <color name="colorBackground">@color/md_dark_background</color>
     <color name="colorBackground_cardView">@color/cardview_dark_background</color>
+
+    <color name="grayedOut">#6f6f6f</color>
 
     <color name="primaryText">@android:color/primary_text_dark</color>
     <color name="secondaryText">@android:color/secondary_text_dark</color>
