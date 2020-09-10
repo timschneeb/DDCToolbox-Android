@@ -5,8 +5,8 @@ Create and edit VDCs on Android
   <img height="300" src="ddctoolbox-android.png">
 </p>
 
-This is an mobile version of DDCToolbox with limited functionality.
-It is designed to provide an user-friendly and easy-to-understand interface, in order to allow even less-experienced users to experiment with the DDC feature included in JamesDSP and Viper4Android.
+This is a mobile version of DDCToolbox with limited functionality.
+It is designed to provide a user-friendly and easy-to-understand interface, in order to allow even less-experienced users to experiment with the DDC feature included in JamesDSP and Viper4Android.
 
 There is also a more advanced [desktop version](https://github.com/ThePBone/DDCToolbox) for Linux, Windows and macOS available.
 
