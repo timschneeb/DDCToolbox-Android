@@ -21,7 +21,6 @@
         tools:targetApi="q">
         <activity
             android:name=".activity.AutoEqSelectionActivity"
-            android:label="@string/title_activity_auto_eq_selection"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
