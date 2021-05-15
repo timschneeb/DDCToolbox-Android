@@ -548,7 +548,7 @@ class MainActivity : AppCompatActivity() {
                 R.drawable.ic_error_outline
             )
         }
-        else if(result.failedCount > 0){
+        else if(result.failedCount > 1){
             DialogUtils.showDialog(this,
                 getString(R.string.autoeq_import_skipped_warning_title),
                 getString(R.string.autoeq_import_skipped_warning, result.failedCount),
