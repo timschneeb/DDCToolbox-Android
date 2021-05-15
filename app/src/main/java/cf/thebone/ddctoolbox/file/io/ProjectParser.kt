@@ -58,7 +58,7 @@ class ProjectParser(private val context: Context) {
                 if (baseParameters.size == 3) {
                     item.filter.RefreshFilter(
                         FilterType.PEAKING,
-                        baseParameters[2].replace(Regex("[^0-9.]"), "").toDouble(),
+                        baseParameters[2].replace(Regex("[^-0-9.]"), "").toDouble(),
                         baseParameters[0].replace(Regex("[^0-9]"), "").toInt(),
                         48000.0,
                         baseParameters[1].replace(Regex("[^0-9.]"), "").toDouble()
@@ -98,7 +98,7 @@ class ProjectParser(private val context: Context) {
                     else {
                         item.filter.RefreshFilter(
                             FilterType.toFilter(baseParameters[3].trim()),
-                            baseParameters[2].replace(Regex("[^0-9.]"), "").toDouble(),
+                            baseParameters[2].replace(Regex("[^-0-9.]"), "").toDouble(),
                             baseParameters[0].replace(Regex("[^0-9]"), "").toInt(),
                             48000.0,
                             baseParameters[1].replace(Regex("[^0-9.]"), "").toDouble()

@@ -1,7 +1,6 @@
 package cf.thebone.ddctoolbox.model
 
 import Biquad
-import cf.thebone.ddctoolbox.R
 import java.io.Serializable
 
 class FilterItem() : Serializable {
@@ -24,8 +23,8 @@ class FilterItem() : Serializable {
     fun handleNullStates(){
         when{
             filter.frequency == null -> filter.frequency = 0
-            filter.bandwidthOrSlope == null -> filter.frequency = 0
-            filter.gain == null -> filter.frequency = 0
+            filter.bandwidthOrSlope == null -> filter.bandwidthOrSlope = 0.0
+            filter.gain == null -> filter.gain = 0.0
         }
     }
 

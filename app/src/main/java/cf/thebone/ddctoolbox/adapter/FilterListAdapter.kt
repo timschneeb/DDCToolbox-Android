@@ -12,7 +12,6 @@ import cf.thebone.ddctoolbox.fragments.FilterEditorFragment
 import cf.thebone.ddctoolbox.model.FilterItem
 import cf.thebone.ddctoolbox.model.FilterType
 import cf.thebone.ddctoolbox.utils.FilterArrayUtils
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.filter_item.view.*
 import kotlinx.android.synthetic.main.filter_item_content.view.*
 import java.util.*
@@ -44,7 +43,7 @@ class FilterListAdapter(items: ArrayList<FilterItem>, private val ctx: Context) 
             view = inflater.inflate(R.layout.filter_item, viewGroup, false)
 
             view.header.setOnClickListener {
-                if(getItem(i)?.filter?.type != FilterType.INVALID)
+                if(getItem(i)?.filter?.type ?: FilterType.INVALID != FilterType.INVALID)
                     view.expandableLayout.toggle(true)
             }
         }

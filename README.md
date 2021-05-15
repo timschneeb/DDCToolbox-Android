@@ -5,16 +5,25 @@ Create and edit VDCs on Android
   <img height="300" src="ddctoolbox-android.png">
 </p>
 
-This is an mobile version of DDCToolbox with limited functionality.
-It is designed to provide an user-friendly and easy-to-understand interface, in order to allow even less-experienced users to experiment with the DDC feature included in JamesDSP and Viper4Android.
+This is a mobile version of DDCToolbox with limited functionality.
+It is designed to provide a user-friendly and easy-to-understand interface, in order to allow even less-experienced users to experiment with the DDC feature included in JamesDSP and Viper4Android.
 
-Of course, I couldn't include every feature found in the [desktop version](https://github.com/ThePBone/DDCToolbox).
+There is also a more advanced [desktop version](https://github.com/ThePBone/DDCToolbox) for Linux, Windows and macOS available.
 
-**Following features are excluded from the Android version** (for now):
-  * Import AutoEQ and (classic) VDC files
-  * Editing/adding custom filters (you can still remove and inspect them)
+Note: Unlike the desktop version, this app is not capable of adding or editiing custom filters, please use the [desktop version](https://github.com/ThePBone/DDCToolbox) for this. 
   
-### Where can I get the APK?
-You can download the lastest version in the [Release section](https://github.com/ThePBone/DDCToolbox-Android/releases)!
+### Download
 
-I'm hoping to get a Google Play Dev Account to publish it on the Play Store soon.
+<p align="left">
+  <a href='https://play.google.com/store/apps/details?id=cf.thebone.ddctoolbox&utm_source=github&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'> 
+    <img width="300" alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/>
+  </a>
+</p>
+
+### Changelogs
+
+You can view changelogs [here](https://github.com/ThePBone/DDCToolbox-Android/releases).
+
+___________________
+
+Google Play and the Google Play logo are trademarks of Google LLC.

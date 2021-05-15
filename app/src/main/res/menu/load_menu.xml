@@ -1,0 +1,18 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/load"
+        android:orderInCategory="1"
+        android:title="@string/menu_load_project" />
+    <item
+        android:id="@+id/importAutoEq"
+        android:orderInCategory="1"
+        android:title="@string/menu_import_from_autoeq" />
+
+    <item
+        android:id="@+id/downloadAutoEq"
+        android:orderInCategory="1"
+        android:title="@string/menu_download_from_autoeq" />
+
+</menu>

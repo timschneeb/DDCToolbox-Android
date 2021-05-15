@@ -13,8 +13,6 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import cf.thebone.ddctoolbox.MainActivity
 import cf.thebone.ddctoolbox.adapter.FilterListAdapter
-import cf.thebone.ddctoolbox.file.ProjectManager
-import cf.thebone.ddctoolbox.file.io.ProjectWriter
 import cf.thebone.ddctoolbox.model.FilterItem
 import cf.thebone.ddctoolbox.utils.StringUtils
 import com.developer.filepicker.model.DialogConfigs
@@ -25,8 +23,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.bottom_sheet_save_content.*
 import kotlinx.android.synthetic.main.bottom_sheet_save_fragment.*
-import kotlinx.android.synthetic.main.custom_header.*
-import kotlinx.android.synthetic.main.custom_header.view.*
 import kotlinx.android.synthetic.main.custom_header.view.projectName
 import java.io.File
 
