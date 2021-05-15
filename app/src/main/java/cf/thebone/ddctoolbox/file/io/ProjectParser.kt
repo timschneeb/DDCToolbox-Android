@@ -34,6 +34,12 @@ class ProjectParser(private val context: Context) {
         return list
     }
 
+    fun String.handleNull(): String {
+        if(this.toLowerCase() == "null")
+            return "0";
+        return this;
+    }
+
     fun parseSingleLine(_line: String): FilterItem?{
         val item = FilterItem()
         var isCustomLine = false
@@ -58,10 +64,10 @@ class ProjectParser(private val context: Context) {
                 if (baseParameters.size == 3) {
                     item.filter.RefreshFilter(
                         FilterType.PEAKING,
-                        baseParameters[2].replace(Regex("[^-0-9.]"), "").toDouble(),
-                        baseParameters[0].replace(Regex("[^0-9]"), "").toInt(),
+                        baseParameters[2].handleNull().replace(Regex("[^-0-9.]"), "").toDouble(),
+                        baseParameters[0].handleNull().replace(Regex("[^0-9]"), "").toInt(),
                         48000.0,
-                        baseParameters[1].replace(Regex("[^0-9.]"), "").toDouble()
+                        baseParameters[1].handleNull().replace(Regex("[^0-9.]"), "").toDouble()
                     )
                 }
                 //Handle standard v4 file format
@@ -74,18 +80,18 @@ class ProjectParser(private val context: Context) {
 
                         for ((counter, coeff) in coeffs.split(",").withIndex()) {
                             when (counter) {
-                                0 -> c441.a0 = coeff.replace(Regex("[^0-9.]"), "").toDouble()
-                                1 -> c441.a1 = coeff.replace(Regex("[^0-9.]"), "").toDouble()
-                                2 -> c441.a2 = coeff.replace(Regex("[^0-9.]"), "").toDouble()
-                                3 -> c441.b0 = coeff.replace(Regex("[^0-9.]"), "").toDouble()
-                                4 -> c441.b1 = coeff.replace(Regex("[^0-9.]"), "").toDouble()
-                                5 -> c441.b2 = coeff.replace(Regex("[^0-9.]"), "").toDouble()
-                                6 -> c48.a0 = coeff.replace(Regex("[^0-9.]"), "").toDouble()
-                                7 -> c48.a1 = coeff.replace(Regex("[^0-9.]"), "").toDouble()
-                                8 -> c48.a2 = coeff.replace(Regex("[^0-9.]"), "").toDouble()
-                                9 -> c48.b0 = coeff.replace(Regex("[^0-9.]"), "").toDouble()
-                                10 -> c48.b1 = coeff.replace(Regex("[^0-9.]"), "").toDouble()
-                                11 -> c48.b2 = coeff.replace(Regex("[^0-9.]"), "").toDouble()
+                                0 -> c441.a0 = coeff.handleNull().replace(Regex("[^0-9.]"), "").toDouble()
+                                1 -> c441.a1 = coeff.handleNull().replace(Regex("[^0-9.]"), "").toDouble()
+                                2 -> c441.a2 = coeff.handleNull().replace(Regex("[^0-9.]"), "").toDouble()
+                                3 -> c441.b0 = coeff.handleNull().replace(Regex("[^0-9.]"), "").toDouble()
+                                4 -> c441.b1 = coeff.handleNull().replace(Regex("[^0-9.]"), "").toDouble()
+                                5 -> c441.b2 = coeff.handleNull().replace(Regex("[^0-9.]"), "").toDouble()
+                                6 -> c48.a0 = coeff.handleNull().replace(Regex("[^0-9.]"), "").toDouble()
+                                7 -> c48.a1 = coeff.handleNull().replace(Regex("[^0-9.]"), "").toDouble()
+                                8 -> c48.a2 = coeff.handleNull().replace(Regex("[^0-9.]"), "").toDouble()
+                                9 -> c48.b0 = coeff.handleNull().replace(Regex("[^0-9.]"), "").toDouble()
+                                10 -> c48.b1 = coeff.handleNull().replace(Regex("[^0-9.]"), "").toDouble()
+                                11 -> c48.b2 = coeff.handleNull().replace(Regex("[^0-9.]"), "").toDouble()
                             }
                         }
 
@@ -98,10 +104,10 @@ class ProjectParser(private val context: Context) {
                     else {
                         item.filter.RefreshFilter(
                             FilterType.toFilter(baseParameters[3].trim()),
-                            baseParameters[2].replace(Regex("[^-0-9.]"), "").toDouble(),
-                            baseParameters[0].replace(Regex("[^0-9]"), "").toInt(),
+                            baseParameters[2].handleNull().replace(Regex("[^-0-9.]"), "").toDouble(),
+                            baseParameters[0].handleNull().replace(Regex("[^0-9]"), "").toInt(),
                             48000.0,
-                            baseParameters[1].replace(Regex("[^0-9.]"), "").toDouble()
+                            baseParameters[1].handleNull().replace(Regex("[^0-9.]"), "").toDouble()
                         )
                     }
                 }

@@ -7,7 +7,6 @@ class FilterSpecification(
 ) : Serializable {
     var requiresFrequency: Boolean = false
     var requiresBandwidth: Boolean = false
-    var requiresSlope: Boolean = false
     var requiresGain: Boolean = false
 
     init{
@@ -19,8 +18,8 @@ class FilterSpecification(
             FilterType.BANDPASS2 -> { requiresFrequency = true; requiresBandwidth = true }
             FilterType.NOTCH -> { requiresFrequency = true; requiresBandwidth = true }
             FilterType.ALLPASS -> { requiresFrequency = true; requiresBandwidth = true }
-            FilterType.LOWSHELF -> { requiresFrequency = true; requiresSlope = true; requiresGain = true}
-            FilterType.HIGHSHELF -> { requiresFrequency = true; requiresSlope = true; requiresGain = true}
+            FilterType.LOWSHELF -> { requiresFrequency = true; requiresBandwidth = true; requiresGain = true}
+            FilterType.HIGHSHELF -> { requiresFrequency = true; requiresBandwidth = true; requiresGain = true}
             FilterType.UNITYGAIN -> requiresGain = true
             FilterType.ONEPOLE_LOWPASS -> requiresFrequency = true
             FilterType.ONEPOLE_HIGHPASS -> requiresFrequency = true

@@ -60,13 +60,13 @@ class Biquad : Serializable {
         }
 
         var alpha: Double? = null
-        if (specs.requiresFrequency && specs.requiresSlope && specs.requiresGain) // S
+        if (specs.requiresFrequency && (type == FilterType.HIGHSHELF || type == FilterType.LOWSHELF) && specs.requiresGain) // S
             alpha = sn!! / 2 * Math.sqrt((d!! + 1 / d) * (1 / bandwidthOrSlope!! - 1) + 2)
         else if(specs.requiresFrequency && specs.requiresBandwidth) // BW
             alpha = sn!! * Math.sinh(0.693147180559945309417 / 2 * bandwidthOrSlope!! * a!! / sn)
 
         var beta: Double? = null
-        if(specs.requiresFrequency && (specs.requiresBandwidth || specs.requiresSlope) && specs.requiresGain)
+        if(specs.requiresFrequency && specs.requiresBandwidth && specs.requiresGain)
             beta = 2.0 * Math.sqrt(d!!) * alpha!!
 
 
@@ -257,13 +257,13 @@ class Biquad : Serializable {
         }
 
         var alpha: Double? = null
-        if (specs.requiresFrequency && specs.requiresSlope && specs.requiresGain) // S
+        if (specs.requiresFrequency && (type == FilterType.HIGHSHELF || type == FilterType.LOWSHELF) && specs.requiresGain) // S
             alpha = sn!! / 2 * Math.sqrt((d!! + 1 / d) * (1 / dBandwidthOrQOrS!! - 1) + 2)
         else if(specs.requiresFrequency && specs.requiresBandwidth) // BW
             alpha = sn!! * Math.sinh(0.693147180559945309417 / 2 * dBandwidthOrQOrS!! * a!! / sn)
 
         var beta: Double? = null
-        if(specs.requiresFrequency && (specs.requiresBandwidth || specs.requiresSlope) && specs.requiresGain)
+        if(specs.requiresFrequency && specs.requiresBandwidth && specs.requiresGain)
             beta = 2.0 * Math.sqrt(d!!) * alpha!!
 
         var B0 = 0.0

@@ -102,33 +102,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/slope"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"/>
-
-            <EditText
-                android:id="@+id/slopeInput"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/slope_hint"
-                android:importantForAutofill="no"
-                android:inputType="numberDecimal"
-                android:singleLine="true" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="@string/gain"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 

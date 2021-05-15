@@ -38,8 +38,8 @@ class FilterItem() : Serializable {
             FilterType.BANDPASS2 -> "${filter.frequency}Hz: $typeString (${filter.bandwidthOrSlope} BW)"
             FilterType.NOTCH -> "${filter.frequency}Hz: $typeString (${filter.bandwidthOrSlope} BW)"
             FilterType.ALLPASS -> "${filter.frequency}Hz: $typeString (${filter.bandwidthOrSlope} BW)"
-            FilterType.LOWSHELF -> "${filter.frequency}Hz: $typeString (${filter.bandwidthOrSlope} S, ${filter.gain}dB)"
-            FilterType.HIGHSHELF -> "${filter.frequency}Hz: $typeString (${filter.bandwidthOrSlope} S, ${filter.gain}dB)"
+            FilterType.LOWSHELF -> "${filter.frequency}Hz: $typeString (${filter.bandwidthOrSlope} BW, ${filter.gain}dB)"
+            FilterType.HIGHSHELF -> "${filter.frequency}Hz: $typeString (${filter.bandwidthOrSlope} BW, ${filter.gain}dB)"
             FilterType.UNITYGAIN -> "$typeString (${filter.gain}dB)"
             FilterType.ONEPOLE_LOWPASS -> "${filter.frequency}Hz: $typeString"
             FilterType.ONEPOLE_HIGHPASS -> "${filter.frequency}Hz: $typeString"
@@ -50,7 +50,6 @@ class FilterItem() : Serializable {
         if ((filter.type == FilterType.INVALID) or (filter.type == null)) return false
         else if(getSpecification().requiresFrequency && filter.frequency == null) return false
         else if(getSpecification().requiresBandwidth && filter.bandwidthOrSlope == null) return false
-        else if(getSpecification().requiresSlope && filter.bandwidthOrSlope == null) return false
         else if(getSpecification().requiresGain && filter.gain == null) return false
         return true
     }

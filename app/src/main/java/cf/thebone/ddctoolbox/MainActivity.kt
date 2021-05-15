@@ -197,7 +197,7 @@ class MainActivity : AppCompatActivity() {
                     .withIcon(GoogleMaterial.Icon.gmd_redo).withIdentifier(3).withSelectable(false),
 
                 PrimaryDrawerItem().withName(getString(R.string.check_filter_stability))
-                    .withIcon(CommunityMaterial.Icon.cmd_alert_circle_check_outline).withSelectable(false)
+                    .withIcon(CommunityMaterial.Icon.cmd_check_circle_outline).withSelectable(false)
                     .withIdentifier(4),
 
                 SectionDrawerItem().withName(getString(R.string.category_plots)),

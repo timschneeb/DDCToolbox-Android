@@ -57,7 +57,6 @@ class FilterEditorFragment : BottomSheetDialogFragment() {
 
             frequencyInput.filters = arrayOf(IntRangeInputFilter(0, 24000))
             bandwidthInput.filters = arrayOf<InputFilter>(DoubleRangeInputFilter(0.0, 100.0))
-            slopeInput.filters = arrayOf<InputFilter>(DoubleRangeInputFilter(0.0, 100.0))
             gainInput.filters = arrayOf<InputFilter>(DoubleRangeInputFilter(-40.0, 40.0))
 
             if(filterItem != null){
@@ -68,8 +67,6 @@ class FilterEditorFragment : BottomSheetDialogFragment() {
                     frequencyInput.text = SpannableStringBuilder(filterItem!!.filter.frequency.toString())
                 if(specs.requiresBandwidth)
                     bandwidthInput.text = SpannableStringBuilder(filterItem!!.filter.bandwidthOrSlope.toString())
-                if(specs.requiresSlope)
-                    slopeInput.text = SpannableStringBuilder(filterItem!!.filter.bandwidthOrSlope.toString())
                 if(specs.requiresGain)
                     gainInput.text = SpannableStringBuilder(filterItem!!.filter.gain.toString())
             }
@@ -117,9 +114,6 @@ class FilterEditorFragment : BottomSheetDialogFragment() {
                     } else if (specs.requiresBandwidth && bandwidthInput.text.isEmpty()) {
                         bandwidthInput.error = getString(R.string.editor_missing_input)
                         valid = false
-                    } else if (specs.requiresSlope && slopeInput.text.isEmpty()) {
-                        slopeInput.error = getString(R.string.editor_missing_input)
-                        valid = false
                     } else if (specs.requiresGain && (gainInput.text.toString() == "-" || gainInput.text.isEmpty())) {
                         gainInput.error = getString(R.string.editor_invalid_input)
                         valid = false
@@ -129,8 +123,6 @@ class FilterEditorFragment : BottomSheetDialogFragment() {
                         var bandwidthOrSlopeOrNull: Double? = null
                         if(specs.requiresBandwidth)
                             bandwidthOrSlopeOrNull = bandwidthInput.text.toString().toDouble()
-                        else if(specs.requiresSlope)
-                            bandwidthOrSlopeOrNull = slopeInput.text.toString().toDouble()
 
                         filterItem = FilterItem(FilterType.toFilter(filterType.text.toString()),
                             frequencyInput.text.toString().toIntOrNull(),
@@ -168,12 +160,10 @@ class FilterEditorFragment : BottomSheetDialogFragment() {
         val specs = FilterSpecification(filter)
         frequencyInput.isEnabled = specs.requiresFrequency
         bandwidthInput.isEnabled = specs.requiresBandwidth
-        slopeInput.isEnabled = specs.requiresSlope
         gainInput.isEnabled = specs.requiresGain
 
         frequencyInput.setHintTextColor(resources.getColor(if (specs.requiresFrequency) R.color.colorHint else R.color.midText))
         bandwidthInput.setHintTextColor(resources.getColor(if (specs.requiresBandwidth) R.color.colorHint else R.color.midText))
-        slopeInput.setHintTextColor(resources.getColor(if (specs.requiresSlope) R.color.colorHint else R.color.midText))
         gainInput.setHintTextColor(resources.getColor(if (specs.requiresGain) R.color.colorHint else R.color.midText))
     }
 }
