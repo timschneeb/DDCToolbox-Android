@@ -60,8 +60,12 @@ class Biquad : Serializable {
         }
 
         var alpha: Double? = null
-        if (specs.requiresFrequency && (type == FilterType.HIGHSHELF || type == FilterType.LOWSHELF) && specs.requiresGain) // S
-            alpha = sn!! / 2 * Math.sqrt((d!! + 1 / d) * (1 / bandwidthOrSlope!! - 1) + 2)
+        if (specs.requiresFrequency && (type == FilterType.HIGHSHELF || type == FilterType.LOWSHELF) && specs.requiresGain) { // S
+            //alpha = sn!! / 2 * Math.sqrt((d!! + 1 / d) * (1 / bandwidthOrSlope!! - 1) + 2)
+                var q: Float = Math.round(1000000f*Math.pow(2.0,bandwidthOrSlope!! * 0.5)/(Math.pow(
+                    2.0,bandwidthOrSlope!!)-1))/1000000f; // convert bw to q
+                alpha = sn!! / 2 * Math.sqrt((d!! + 1 / d) * (1 / q - 1) + 2);
+        }
         else if(specs.requiresFrequency && specs.requiresBandwidth) // BW
             alpha = sn!! * Math.sinh(0.693147180559945309417 / 2 * bandwidthOrSlope!! * a!! / sn)
 

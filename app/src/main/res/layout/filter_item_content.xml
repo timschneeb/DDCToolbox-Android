@@ -33,7 +33,7 @@
             app:iiv_color="@color/material_drawer_secondary_text"
             app:iiv_size="28dp"
             app:iiv_padding="3dp"
-            app:iiv_icon="gmi-edit"
+            app:iiv_icon="cmd-pencil"
             />
         <com.mikepenz.iconics.view.IconicsImageButton
             style="?android:attr/borderlessButtonStyle"
