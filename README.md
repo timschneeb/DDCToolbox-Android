@@ -10,7 +10,7 @@ It is designed to provide a user-friendly and easy-to-understand interface, in o
 
 There is also a more advanced [desktop version](https://github.com/ThePBone/DDCToolbox) for Linux, Windows and macOS available.
 
-Note: Unlike the desktop version, this app is not capable of adding or editiing custom filters, please use the [desktop version](https://github.com/ThePBone/DDCToolbox) for this. 
+Note: Unlike the desktop version, this app is not capable of adding or editing custom filters, please use the [desktop version](https://github.com/ThePBone/DDCToolbox) for this. 
   
 ### Download
 
